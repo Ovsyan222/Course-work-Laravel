@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use App\Http\Controllers\Controller;
+use App\Mail\ArticleMail;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Support\Facades\Mail;
 
 class ArticleController extends Controller
 {
@@ -46,7 +48,8 @@ class ArticleController extends Controller
         $article->title = $request->title;
         $article->shortDesc = $request->shortDesc;
         $article->desc = $request->desc;
-        $article->save();
+        $result = $article->save();
+        if ($result) Mail::send(new ArticleMail($article));
         return redirect(route('article.index'));
     }
 
