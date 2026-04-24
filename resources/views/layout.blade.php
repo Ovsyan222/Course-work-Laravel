@@ -26,12 +26,19 @@
               </div>
             </div>
             <div class="navbar-nav d-flex justify-end">
+                @guest
                 <li class="nav-link">
-                    <a href="/signup">SignUp</a>
+                    <a href="/auth/create">SignUp</a>
                 </li>
                 <li class="nav-link">
                     <a href="/auth/login">SignIn</a>
                 </li>
+                @endguest
+                @auth
+                <li class="nav-link">
+                    <a href="/auth/logout">Logout</a>
+                </li>
+                @endauth
               </div>
           </div>
         </nav>

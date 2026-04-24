@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MainController;
 use Illuminate\Support\Facades\Route;
 
+// Route::resource('/article', ArticleController::class)->middleware('auth:sanctum');
 Route::resource('/article', ArticleController::class);
 
 // Route::group(['prefix'=>'/article'], function() {
@@ -13,8 +14,12 @@ Route::resource('/article', ArticleController::class);
 //     Route::get('/store', [ArticleController::class, 'store']);
 // });
 
-Route::get('/signup', [AuthController::class, 'create']);
-Route::post('/auth/login', [AuthController::class, 'signUp']);
+Route::get('/auth/create', [AuthController::class, 'create']);
+Route::post('/auth/signUp', [AuthController::class, 'signUp']);
+Route::get('/auth/login', [AuthController::class, 'login'])->name('login');
+Route::post('/auth/signIn', [AuthController::class, 'customLogin']);
+Route::get('/auth/logout', [AuthController::class, 'logout']);
+
 Route::get('/', [MainController::class, 'index']);
 Route::get('/gallery/{full_image}', [MainController::class, 'show']);
 
