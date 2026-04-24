@@ -21,6 +21,7 @@
               <div class="navbar-nav">
                 <a class="nav-link active" aria-current="page" href="/about">About us</a>
                 <a class="nav-link" href="/contact">Contacts</a>
+                <a class="nav-link" href="/article/show">Articles</a>
               </div>
             </div>
             <div class="navbar-nav d-flex justify-end">
