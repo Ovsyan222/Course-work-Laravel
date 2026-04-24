@@ -23,6 +23,14 @@
                 <a class="nav-link" href="/contact">Contacts</a>
               </div>
             </div>
+            <div class="navbar-nav d-flex justify-end">
+                <li class="nav-link">
+                    <a href="/signup">SignUp</a>
+                </li>
+                <li class="nav-link">
+                    <a href="/auth/login">SignIn</a>
+                </li>
+              </div>
           </div>
         </nav>
     </header>
