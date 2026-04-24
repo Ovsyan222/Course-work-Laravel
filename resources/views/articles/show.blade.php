@@ -1,27 +1,17 @@
 @extends('layout')
 
 @section('content')
-    <table class="table">
-  <thead>
-    <tr>
-      <th scope="col">Date</th>
-      <th scope="col">Name</th>
-      <th scope="col">ShortDesk</th>
-      <th scope="col">Desc</th>
-      <th scope="col">Image</th>
-    </tr>
-  </thead>
-  <tbody>
-    @foreach($articles as $article)
-    <tr>
-      <th scope="row">{{$article['datePublic']}}</th>
-      <td>{{$article['name']}}</td>
-      <td>{{$article['shortDesc']}}</td>
-      <td>{{$article['desc']}}</td>
-      <td><a href="/gallery/{{$article['full_image']}}"><img src="{{URL::asset('/images/'.$article['preview_image'])}}" width="100" height="100"></a></td>
-    </tr>
-    @endforeach
-
-  </tbody>
-</table>
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">{{$article->title}}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">{{$article->shortDesc}}</h6>
+            <p class="card-text">{{$article->desc}}</p>
+            <a href="/article/{{$article->id}}/edit" class="card-link">Edit</a>
+            <form action="/article/{{$article->id}}" method="post">
+                @method('DELETE')
+                @csrf
+                <button class="card-link" type="submit">Delete</button>
+            </form>
+        </div>
+    </div>
 @endsection
