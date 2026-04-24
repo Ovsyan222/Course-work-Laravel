@@ -24,6 +24,9 @@
                 @auth
                 <a class="nav-link" href="/article">Articles</a>
                 <a class="nav-link" href="/article/create">Create article</a>
+                @can('moderate', App\Models\Comment::class)
+                    <a class="nav-link" href="{{ route('comments.moderation') }}">📝 Модерация комментариев</a>
+                @endcan
                 @endauth
               </div>
             </div>

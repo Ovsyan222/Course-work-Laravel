@@ -4,6 +4,16 @@ use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MainController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CommentController;
+
+// Маршруты для комментариев
+Route::middleware(['auth'])->group(function () {
+    Route::post('/article/{article}/comments', [CommentController::class, 'store'])->name('comments.store');
+    Route::get('/moderation/comments', [CommentController::class, 'moderation'])->name('comments.moderation')->middleware('can:moderate,App\Models\Comment');
+    Route::put('/comments/{comment}/approve', [CommentController::class, 'approve'])->name('comments.approve');
+    Route::put('/comments/{comment}/reject', [CommentController::class, 'reject'])->name('comments.reject');
+    Route::delete('/comments/{comment}', [CommentController::class, 'destroy'])->name('comments.destroy');
+});
 
 // Route::resource('/article', ArticleController::class)->middleware('auth:sanctum');
 Route::resource('/article', ArticleController::class);
