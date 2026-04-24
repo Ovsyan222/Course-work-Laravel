@@ -1,10 +1,10 @@
 <?php
 
+use App\Http\Controllers\MainController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('main/hello');
-});
+Route::get('/', [MainController::class, 'index']);
+Route::get('/gallery/{full_image}', [MainController::class, 'show']);
 
 Route::get('/about', function () {
     return view('main/about');
