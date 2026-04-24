@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 class AuthController extends Controller
 {
     public function create() {
-        // return view('auth/signup');
+        return view('auth/signup');
     }
 
     public function signUp(Request $request){
@@ -26,18 +26,13 @@ class AuthController extends Controller
             'password' => Hash::make(request('password'))
         ]);
 
-        $token = $user->createToken('myAppToken');
-        $responce = [
-            'user'=>$user,
-            'token'=>$token
-        ];
-        return response()->json($responce, 201);
-        // return redirect()->route('login');
+        $user->createToken('myAppToken');
+        return redirect()->route('login');
 
     }
 
     public function login() {
-        // return view('auth.login');
+        return view('auth.login');
     }
 
     public function customLogin(Request $request) {
@@ -52,20 +47,18 @@ class AuthController extends Controller
         ];
 
         if (Auth::attempt($credentials)) {
-            return response('Bad login', 401);
+            return redirect('/');
         }
 
-        $user = User::where('email', request('email'))->first();
-        $token = $user->createToken('myAppToken');
-        $responce = [
-            'user'=>$user,
-            'token'=>$token
-        ];
-        return response()->json($responce, 201);
+        return back()->withErrors([
+            'email'=> 'The provided'
+        ]);
     }
 
     public function logout(Request $request) {
         Auth::logout();
-        return response(['Message'=>'Log out'], 201);
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('/');
     }
 }
